@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher Encryption and Decryption</title>
+    <style>
+        body {
+            background-image: url('https://media.licdn.com/dms/image/C4D12AQHMPBvE3avWzg/article-inline_image-shrink_1000_1488/0/1616872522462?e=1723075200&v=beta&t=Ol-HBOW5IydHEQHjM_XgNZIGntklSZmqnonBoaK2ozA');
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        pre {
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Caesar Cipher Encryption and Decryption</h1>
+        <pre>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void encrypt() {
+    int len, shift, n;
+    char message[100];
+    printf("Enter text and halt with ~: ");
+    scanf("%[^~]s", message);
+    getchar();
+    printf("Enter the shift value: ");
+    scanf("%d", &shift);
+    char ch;
+    n = strlen(message);
+    for (int i = 0; i < n; i++) {
+        ch = message[i];
+        if (ch >= 'a' && ch <= 'z') {
+            ch = ch + shift;
+            if (ch > 'z') {
+                ch = ch - 'z' + 'a' - 1;
+            }
+            message[i] = ch;
+        } else if (ch >= 'A' && ch <= 'Z') {
+            ch = ch + shift;
+            if (ch > 'Z') {
+                ch = ch - 'Z' + 'A' - 1;
+            }
+            message[i] = ch;
+        }
+    }
+    printf("Encrypted message: %s\n", message);
+}
+
+void decrypt() {
+    int len, shift, n;
+    char message[100];
+    printf("Enter text and halt with ~: ");
+    scanf("%[^~]s", message);
+    getchar();
+    printf("Enter the shift value: ");
+    scanf("%d", &shift);
+    char ch;
+    n = strlen(message);
+    for (int i = 0; i < n; i++) {
+        ch = message[i];
+        if (ch >= 'a' && ch <= 'z') {
+            ch = ch - shift;
+            if (ch < 'a') {
+                ch = ch + 'z' - 'a' + 1;
+            }
+            message[i] = ch;
+        } else if (ch >= 'A' && ch <= 'Z') {
+            ch = ch - shift;
+            if (ch < 'A') {
+                ch = ch + 'Z' - 'A' + 1;
+            }
+            message[i] = ch;
+        }
+    }
+    printf("Decrypted message: %s\n", message);
+}
+
+int main() {
+    int choice;
+    printf("Select:\n1 to encrypt\n2 to decrypt\n");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            encrypt();
+            break;
+        case 2:
+            decrypt();
+            break;
+        default:
+            printf("Wrong choice\n");
+            break;
+    }
+    return 0;
+}
+        </pre>
+    </div>
+</body>
+</html>
